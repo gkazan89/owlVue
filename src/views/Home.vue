@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <h1>{{ message }}</h1>
     <h2>Preferences</h2>
     <div v-for="pref in preferences">
       <p>{{  pref.user_id  }}</p>
