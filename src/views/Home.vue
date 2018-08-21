@@ -2,15 +2,23 @@
   <div class="home">
     <h2>Articles</h2>
     <div v-for="art in articles">
-      <h2>{{  art.title  }}</h2>
-      <h3>{{  art.author  }}</h3>
-      <p v-html="art.body"></p>
+      <div class="article_img">
+        <h2>{{  art.title  }}</h2>
+        <h3>{{  art.author  }}</h3>
+        <img v-bind:src="art.master_image" alt = "">
+        <p v-html="art.body"></p>
+      </div>
     </div>
-
   </div>
 </template>
 
 <style>
+  .article_img img {
+    display: block;
+    max-width: 500px;
+    max-height: 300px;
+  }
+
 </style>
 
 <script>
@@ -25,6 +33,7 @@ export default {
   created: function() {
     axios.get("http://localhost:3000/api/preferences").then(
       function(response) {
+        console.log("PREFERENCES:");
         console.log(response);
         this.preferences = response.data;
       }.bind(this)
@@ -32,13 +41,16 @@ export default {
 
     axios.get("http://localhost:3000/api/articles").then(
       function(response) {
+        console.log("ARTICLES");
         console.log(response);
         this.articles = response.data;
       }.bind(this)
     );
   },
 
-  methods: {},
+  methods: {
+
+  },
   computed: {}
 };
 </script>
