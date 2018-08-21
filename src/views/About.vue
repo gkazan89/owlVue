@@ -3,9 +3,11 @@
     <h2>Category Select</h2>
     <div v-for="cat in categories">
       <ul>
-        <ol>{{cat.name}}</ol>
+        <input type="checkbox" v-model="checkedNames">
+        <label for><ol>{{cat.name}}</ol></label>
       </ul>  
     </div>
+    <div id="cats">Checked categories: {{  checkedNames  }}</div>
   </div>
 </template>
 
@@ -27,7 +29,9 @@ export default {
     );
   },
 
-  methods: {},
+  methods: {
+  },
   computed: {}
 };
+
 </script>
