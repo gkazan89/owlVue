@@ -1,33 +1,28 @@
 <template>
   <div class="about">
-    <h1>Articles:</h1>
-    
-    <div v-for="art in articles">
-      <h2>{{  art.title  }}</h2>
-      <h2>{{  art.category  }}</h2>
-      <p>{{  art.author  }}</p>
-      <p>{{  art.body  }}</p>
+    <h2>Category Select</h2>
+    <div v-for="cat in categories">
+      <ul>
+        <ol>{{cat.name}}</ol>
+      </ul>  
     </div>
-
   </div>
 </template>
-
-
-
 
 <script>
 var axios = require("axios");
 export default {
   data: function() {
     return {
-      articles: []
+      categories: [],
     };
   },
-  readArticles: function(readArticles) {
-    axios.get("http://localhost:3000/api/articles").then(
+  created: function() {
+    axios.get("http://localhost:3000/api/categories").then(
       function(response) {
+        console.log("CATEGORIES:");
         console.log(response);
-        this.articles = response.data;
+        this.categories = response.data;
       }.bind(this)
     );
   },

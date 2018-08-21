@@ -26,19 +26,10 @@ var axios = require("axios");
 export default {
   data: function() {
     return {
-      preferences: [],
       articles: []
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/preferences").then(
-      function(response) {
-        console.log("PREFERENCES:");
-        console.log(response);
-        this.preferences = response.data;
-      }.bind(this)
-    );
-
     axios.get("http://localhost:3000/api/articles").then(
       function(response) {
         console.log("ARTICLES");
