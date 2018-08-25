@@ -6,6 +6,7 @@ import Signup from "./views/Signup.vue";
 import Login from "./views/Login.vue";
 import Logout from "./views/Logout.vue";
 import Test from "./views/Test.vue";
+import Saph from "./views/Saph.vue";
 
 Vue.use(Router);
 
@@ -16,6 +17,7 @@ export default new Router({
     { path: "/signup", name: "signup", component: Signup },
     { path: "/login", name: "login", component: Login },
     { path: "/logout", name: "logout", component: Logout },
-    { path: "/test", name: "test", component: Test }
+    { path: "/test", name: "test", component: Test },
+    { path: "/saph", name: "saph", component: Saph }
   ]
 });

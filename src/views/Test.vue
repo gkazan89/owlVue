@@ -5,8 +5,8 @@
       <div class="article_img">
         <h2>{{  art.title  }}</h2>
         <h3>{{  art.author  }}</h3>
-        <img v-bind:src="art.master_image" alt = "">
-        <p v-html="art.body"></p>
+        <!-- <img v-bind:src="art.master_image" alt = "">
+        <p v-html="art.body"></p> -->
       </div>
       <button>Press button</button>
     </div>
