@@ -14,12 +14,11 @@
 </template>
 
 <style>
-  .article_img img {
-    display: block;
-    max-width: 500px;
-    max-height: 300px;
-  }
-
+.article_img img {
+  display: block;
+  max-width: 500px;
+  max-height: 300px;
+}
 </style>
 
 <script>
@@ -38,11 +37,12 @@ export default {
         this.articles = response.data;
       }.bind(this)
     );
+    console.log(this);
+
+    var other = axios.get();
   },
 
-  methods: {
-
-  },
+  methods: {},
   computed: {}
 };
 </script>
