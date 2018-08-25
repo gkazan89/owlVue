@@ -2,13 +2,17 @@
   <div class="home">
     <h2>Articles</h2>
     <div v-for="art in articles">
-      <div class="article_img">
+<!--       <div class="article_img">
         <h2>{{  art.title  }}</h2>
-        <h3>{{  art.author  }}</h3>
+        <h3>{{  art.author  }}</h3> -->
         <!-- <img v-bind:src="art.master_image" alt = "">
         <p v-html="art.body"></p> -->
-      </div>
+      <p>First link:</p>
+      <p>{{  art.READ_THIS_apiUrl  }}</p>
       <button>Press button</button>
+      <p>Next link:</p>
+      <p>{{  art.next_api_up  }}</p>
+      
     </div>
   </div>
 </template>
@@ -30,7 +34,7 @@ export default {
     };
   },
   created: function() {
-    axios.get("http://localhost:3000/api/test").then(
+    axios.get("http://localhost:3000/api/view").then(
       function(response) {
         console.log("ARTICLES");
         console.log(response);
@@ -39,7 +43,7 @@ export default {
     );
     console.log(this);
 
-    var other = axios.get();
+    // var other = axios.get();
   },
 
   methods: {},
