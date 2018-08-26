@@ -5,6 +5,9 @@
       <button v-on:click="counter(num)">Press Me</button>
 <!--       <h2>{{  num  }}</h2> -->
     </div>  
+    <div>
+      {{  info  }}
+    </div>
 <!--     <div v-for="art in articles">
       <div class="article_img">
         <h2>{{  art.title  }}</h2>
@@ -40,19 +43,18 @@ export default {
     var key = process.env.VUE_APP_MY_API_KEY;
     var sport = "https://content.guardianapis.com/sport?&api-key=";
     console.log("Ready to call the API!");
-    axios.get(sport + key).then(
-      function(response) {
-        console.log(response);
-        this.info = response.data;
-      }.bind(this)
-    );
+    axios
+      .get(sport + key)
+      .then(response => (this.info = response.data.response.results[1]));
+    console.log("SEE BELOW:");
+    // console.log(response);
   },
 
   methods: {
     counter: function() {
       var num = 0;
       num += 1;
-      console.log(num);
+      // console.log(num);
     }
   },
   computed: {}
