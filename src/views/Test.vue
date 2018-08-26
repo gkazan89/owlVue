@@ -2,16 +2,13 @@
   <div class="home">
     <h1>Articles</h1>
     <div>
-      <div v-for="art in articles">
-        <h1>{{art.category}}</h1>
+      <div v-for="category in categories">
+        <h2>{{category.category}}</h2>
+        <h4>{{ category.data[category.currentArticleIndex].webTitle }}</h4>
+        <button v-on:click="upOne(category)">Up One</button>
+        <button v-on:click="downOne(category)">Down One</button>
+        <p>{{category.currentArticleIndex}}</p>
       </div>  
-    <!-- <p>{{art[artDex].sectionName}}</p>
-    <h2>{{art[artDex].webTitle}}</h2>
-    <p>{{art[artDex]}}</p>
-    <p>{{artDex}}</p>
-    <button v-on:click="artDex += 1">Plus button</button>
-    <button v-on:click="artDex -= 1">Minus button</button>
-    </div> -->
     </div>
   </div>
 </template>
@@ -29,19 +26,18 @@ var axios = require("axios");
 export default {
   data: function() {
     return {
-      articles: [],
-      // can't affect all other articles....
-      artDex: 0
+      categories: [],
+      // can't affect all other categories....
     };
 
   },
-  // make request to articles view to retrieve first and second item in category JSON data
+  // make request to categories view to retrieve first and second item in category JSON data
   created: function() {
     axios.get("http://localhost:3000/api/test").then(
       function(response) {
-        console.log("ARTICLES");
+        console.log("categories");
         console.log(response);
-        this.articles = response.data;
+        this.categories = response.data;
       }.bind(this)
     );
     console.log(this);
@@ -49,7 +45,20 @@ export default {
     // var other = axios.get();
   },
 
-  methods: {},
+  methods: {
+    upOne: function(category) {
+      if (category.currentArticleIndex < category.data.length) {
+        category.currentArticleIndex += 1;
+      }
+      console.log(category.currentArticleIndex);
+    },
+    downOne: function(category) {
+      if (category.currentArticleIndex > 0) {
+        category.currentArticleIndex -= 1;
+      }
+      console.log(category.currentArticleIndex);
+    }
+  },
   computed: {}
 };
 </script>
