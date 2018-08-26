@@ -7,6 +7,7 @@
         <h3>{{  art.author  }}</h3> -->
         <!-- <img v-bind:src="art.master_image" alt = "">
         <p v-html="art.body"></p> -->
+      <h2>{{art.category}}</h2>
       <p>First link:</p>
       <p>{{  art.READ_THIS_apiUrl  }}</p>
       <button>Press button</button>
@@ -33,6 +34,8 @@ export default {
       articles: []
     };
   },
+
+  // make request to articles view 
   created: function() {
     axios.get("http://localhost:3000/api/view").then(
       function(response) {

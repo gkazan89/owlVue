@@ -3,7 +3,7 @@
     <h2>No Ruby Calls</h2>
     <div>
       <button v-on:click="counter(num)">Press Me</button>
-      <h2>{{  num  }}</h2>
+<!--       <h2>{{  num  }}</h2> -->
     </div>  
 <!--     <div v-for="art in articles">
       <div class="article_img">
@@ -23,25 +23,29 @@
     max-width: 500px;
     max-height: 300px;
   }*/
-
 </style>
 <script>
 var axios = require("axios");
 export default {
   data: function() {
-    // var key = process.env.VUE_APP_MY_API_KEY;
+    // console.log(key);
     // results: [];
     return {
-      info: null
+      info: []
     };
   },
   // need to find out about the API KEY. DO NOT INCLUDE IN COMMIT!!
   //   console.log(process.env.VUE_APP_MY_API_KEY);
   created: function() {
+    var key = process.env.VUE_APP_MY_API_KEY;
+    var sport = "https://content.guardianapis.com/sport?&api-key=";
     console.log("Ready to call the API!");
-    var results = axios.get("https://content.guardianapis.com/sport?&api-key=APIKEY").then(response => this.info = response.data.response.results[0].apiUrl);
-    console.log(results);
-    console.log("Call complete");
+    axios.get(sport + key).then(
+      function(response) {
+        console.log(response);
+        this.info = response.data;
+      }.bind(this)
+    );
   },
 
   methods: {
@@ -50,10 +54,7 @@ export default {
       num += 1;
       console.log(num);
     }
-
   },
-  computed: {
-
-  }
+  computed: {}
 };
 </script>
