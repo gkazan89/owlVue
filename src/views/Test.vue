@@ -1,19 +1,13 @@
 <template>
   <div class="home">
-    <h2>Articles</h2>
+    <h1>Articles</h1>
     <div v-for="art in articles">
-<!--       <div class="article_img">
-        <h2>{{  art.title  }}</h2>
-        <h3>{{  art.author  }}</h3> -->
-        <!-- <img v-bind:src="art.master_image" alt = "">
-        <p v-html="art.body"></p> -->
-      <h2>{{art.category}}</h2>
-      <p>First link:</p>
-      <p>{{  art.READ_THIS_apiUrl  }}</p>
-      <button>Press button</button>
-      <p>Next link:</p>
-      <p>{{  art.next_api_up  }}</p>
-      
+    <p>{{art[artDex].sectionName}}</p>
+    <h2>{{art[artDex].webTitle}}</h2>
+    <p>{{art[artDex]}}</p>
+    <p>{{artDex}}</p>
+    <button v-on:click="artDex += 1">Plus button</button>
+    <button v-on:click="artDex -= 1">Minus button</button>
     </div>
   </div>
 </template>
@@ -31,11 +25,13 @@ var axios = require("axios");
 export default {
   data: function() {
     return {
-      articles: []
+      articles: [],
+      artDex: 0,
+      num: 0
     };
-  },
 
-  // make request to articles view 
+  },
+  // make request to articles view to retrieve first and second item in category JSON data
   created: function() {
     axios.get("http://localhost:3000/api/view").then(
       function(response) {

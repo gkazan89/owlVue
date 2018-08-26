@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2>No Ruby Calls</h2>
+    <h2>Request straight to API</h2>
     <div>
       <button v-on:click="counter(num)">Press Me</button>
 <!--       <h2>{{  num  }}</h2> -->
