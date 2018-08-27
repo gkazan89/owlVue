@@ -6,6 +6,7 @@
         <h2>{{category.category}}</h2>
         <h4>{{ category.data[category.currentArticleIndex].webTitle }}</h4>
         <p>{{category.data[category.currentArticleIndex].apiUrl}}</p>
+        <!-- Hidden article text here -->
         <div>
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(category)">Up One</button>
         </div>
@@ -18,7 +19,9 @@
         <div>
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="visible(category)">VISIBLE</button>
         </div>
-<!--         <p v-html="info.response.content.blocks.body[0].bodyHtml"></p> -->
+<!--         <div>
+          <p v-html="info.response.content.blocks.body[0].bodyHtml"></p>
+        </div> -->
       </div>  
     </div>
   </div>
@@ -81,8 +84,12 @@ export default {
       );
       console.log(this);
     },
-
+    // need to figure out how to get this to change
     visible: function(category) {
+      console.log("CURRENT STATUS:");
+      console.log(category.currentArticleVisible);
+      category.currentArticleVisible = !category.currentArticleVisible;
+      console.log("NEW STATUS:");
       console.log(category.currentArticleVisible);
     }
   },
