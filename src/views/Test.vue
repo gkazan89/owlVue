@@ -19,9 +19,9 @@
         <div>
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="visible(category)">VISIBLE</button>
         </div>
-<!--         <div>
-          <p v-html="info.response.content.blocks.body[0].bodyHtml"></p>
-        </div> -->
+        <div>
+          <p v-if="category.currentArticleVisible" v-html="info.response.content.blocks.body[0].bodyHtml"></p>
+        </div>
       </div>  
     </div>
   </div>
