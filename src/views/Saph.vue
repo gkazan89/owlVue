@@ -17,18 +17,10 @@
             <div v-for="categoryWithSide in categoriesWithSides">
               <div v-bind:class="'cube__face cube__face--'+categoryWithSide.side">
                 <p>{{categoryWithSide.category.category}}</p>
-
-
-
-
-                <h1>YO...</h1>
                 <p>{{ categoryWithSide.category.data[categoryWithSide.category.currentArticleIndex].webTitle }}</p>
                 <div>
                   <p v-if="categoryWithSide.category.currentArticleVisible" v-html="info.response.content.blocks.body[0].bodyHtml"></p>
                 </div>
-
-
-
                 <div class="buttons">
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(categoryWithSide.category)">Up One</button>
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="downOne(categoryWithSide.category)">Down One</button>
