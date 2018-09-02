@@ -15,34 +15,26 @@
         <div class="scene">
           <div class="cube">
             <div v-for="category in categoryNamesWithSides">
-              <div v-bind:class="'cube__face cube__face--'+category.side">{{category.category}}</div>
+              <div v-bind:class="'cube__face cube__face--'+category.side">
+                <p>{{category.category}}</p>
+                <div class="buttons">
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(category)">Up One</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="downOne(category)">Down One</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="show-dialog" v-on:click="read(category)">READ</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="visible(category)">VISIBLE</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        
+        <div v-for="category in categories">
+          <p>{{ category.data[category.currentArticleIndex].webTitle }}</p>
+          <div>
+            <p v-if="category.currentArticleVisible" v-html="info.response.content.blocks.body[0].bodyHtml"></p>
+          </div>
+        </div>  
       </div>  
-
-      <div v-for="category in categories">
-        <h2>{{category.category}}</h2>
-        <h4>{{ category.data[category.currentArticleIndex].webTitle }}</h4>
-<!--         <p>{{category.data[category.currentArticleIndex].apiUrl}}</p> -->
-        <!-- Hidden article text here -->
-        <div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(category)">Up One</button>
-        </div>
-        <div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="downOne(category)">Down One</button>
-        </div>
-        <div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="show-dialog" v-on:click="read(category)">READ</button>
-        </div>
-        <div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="visible(category)">VISIBLE</button>
-        </div>
-        <div>
-          <p v-if="category.currentArticleVisible" v-html="info.response.content.blocks.body[0].bodyHtml"></p>
-        </div>
-      </div>  
-<!--       <p>{{categories.category.first}}</p> -->
     </div>
   </div>
 </template>
@@ -106,6 +98,7 @@
   text-align: center;
 }
 
+
 .cube__face--front {
   background: hsla(0, 100%, 50%, 0.7);
 }
@@ -147,6 +140,7 @@
 label {
   margin-right: 10px;
 }
+
 </style>
 
 
@@ -191,7 +185,9 @@ export default {
         // this.categoryNamesWithSides = this.categories.map(category => {category: category.category, })
       }.bind(this)
     );
+    console.log("HELLO!!!");
     console.log(this);
+    console.log("-------");
 
     // var other = axios.get();
   },
