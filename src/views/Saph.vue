@@ -6,140 +6,146 @@
       <div class="bigbox">
         <!-- fuse the cube with the article text -->
         <div class="radio-group" v-on:click="changeSide">
-          <div v-for="category in categoryNamesWithSides">
+          <div v-for="categoryWithSide in categoriesWithSides">
             <label>
-              <input type="radio" name="rotate-cube-side" v-bind:value="category.side"/> {{category.category}}
+              <input type="radio" name="rotate-cube-side" v-bind:value="categoryWithSide.side"/> {{categoryWithSide.category.category}}
             </label>
           </div>
         </div>  
         <div class="scene">
           <div class="cube">
-            <div v-for="category in categoryNamesWithSides">
-              <div v-bind:class="'cube__face cube__face--'+category.side">
-                <p>{{category.category}}</p>
+            <div v-for="categoryWithSide in categoriesWithSides">
+              <div v-bind:class="'cube__face cube__face--'+categoryWithSide.side">
+                <p>{{categoryWithSide.category.category}}</p>
+
+
+
+
+                <h1>YO...</h1>
+                <p>{{ categoryWithSide.category.data[categoryWithSide.category.currentArticleIndex].webTitle }}</p>
+                <div>
+                  <p v-if="categoryWithSide.category.currentArticleVisible" v-html="info.response.content.blocks.body[0].bodyHtml"></p>
+                </div>
+
+
+
                 <div class="buttons">
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(category)">Up One</button>
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="downOne(category)">Down One</button>
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="show-dialog" v-on:click="read(category)">READ</button>
-                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="visible(category)">VISIBLE</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(categoryWithSide.category)">Up One</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="downOne(categoryWithSide.category)">Down One</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="show-dialog" v-on:click="read(categoryWithSide.category)">READ</button>
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="visible(categoryWithSide.category)">VISIBLE</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        
-        <div v-for="category in categories">
-          <p>{{ category.data[category.currentArticleIndex].webTitle }}</p>
-          <div>
-            <p v-if="category.currentArticleVisible" v-html="info.response.content.blocks.body[0].bodyHtml"></p>
-          </div>
-        </div>  
+
       </div>  
     </div>
   </div>
 </template>
 
 <style>
-.article_img img {
-  display: block;
-  max-width: 500px;
-  max-height: 300px;
-}
+  .article_img img {
+    display: block;
+    max-width: 500px;
+    max-height: 300px;
+  }
 
-.bigbox {
-  box-sizing: border-box;
-}
+  .bigbox {
+    box-sizing: border-box;
+  }
 
-.scene {
-  width: 500px;
-  height: 500px;
-  border: 1px solid #ccc;
-  margin: 100px;
-  perspective: 600px;
-}
+  .scene {
+    width: 500px;
+    height: 500px;
+    border: 1px solid #ccc;
+    margin: 100px;
+    perspective: 600px;
+  }
 
-.cube {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transform: translateZ(-250px);
-  transition: transform 1s;
-}
+  .cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(-250px);
+    transition: transform 1s;
+  }
 
-.cube.show-front {
-  transform: translateZ(-250px) rotateY(0deg);
-}
-.cube.show-right {
-  transform: translateZ(-250px) rotateY(-90deg);
-}
-.cube.show-back {
-  transform: translateZ(-250px) rotateY(-180deg);
-}
-.cube.show-left {
-  transform: translateZ(-250px) rotateY(90deg);
-}
-.cube.show-top {
-  transform: translateZ(-250px) rotateX(-90deg);
-}
-.cube.show-bottom {
-  transform: translateZ(-250px) rotateX(90deg);
-}
+  .cube.show-front {
+    transform: translateZ(-250px) rotateY(0deg);
+  }
+  .cube.show-right {
+    transform: translateZ(-250px) rotateY(-90deg);
+  }
+  .cube.show-back {
+    transform: translateZ(-250px) rotateY(-180deg);
+  }
+  .cube.show-left {
+    transform: translateZ(-250px) rotateY(90deg);
+  }
+  .cube.show-top {
+    transform: translateZ(-250px) rotateX(-90deg);
+  }
+  .cube.show-bottom {
+    transform: translateZ(-250px) rotateX(90deg);
+  }
 
-.cube__face {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  border: 2px solid black;
-  line-height: 500px;
-  font-size: 40px;
-  font-weight: bold;
-  color: white;
-  text-align: center;
-}
+  .cube__face {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border: 2px solid black;
+    line-height: 500px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+  }
 
 
-.cube__face--front {
-  background: hsla(0, 100%, 50%, 0.7);
-}
-.cube__face--right {
-  background: hsla(60, 100%, 50%, 0.7);
-}
-.cube__face--back {
-  background: hsla(120, 100%, 50%, 0.7);
-}
-.cube__face--left {
-  background: hsla(180, 100%, 50%, 0.7);
-}
-.cube__face--top {
-  background: hsla(240, 100%, 50%, 0.7);
-}
-.cube__face--bottom {
-  background: hsla(300, 100%, 50%, 0.7);
-}
+  .cube__face--front {
+    background: hsla(0, 100%, 50%, 0.7);
+  }
+  .cube__face--right {
+    background: hsla(60, 100%, 50%, 0.7);
+  }
+  .cube__face--back {
+    background: hsla(120, 100%, 50%, 0.7);
+  }
+  .cube__face--left {
+    background: hsla(180, 100%, 50%, 0.7);
+  }
+  .cube__face--top {
+    background: hsla(240, 100%, 50%, 0.7);
+  }
+  .cube__face--bottom {
+    background: hsla(300, 100%, 50%, 0.7);
+  }
 
-.cube__face--front {
-  transform: rotateY(0deg) translateZ(250px);
-}
-.cube__face--right {
-  transform: rotateY(90deg) translateZ(250px);
-}
-.cube__face--back {
-  transform: rotateY(180deg) translateZ(250px);
-}
-.cube__face--left {
-  transform: rotateY(-90deg) translateZ(250px);
-}
-.cube__face--top {
-  transform: rotateX(90deg) translateZ(250px);
-}
-.cube__face--bottom {
-  transform: rotateX(-90deg) translateZ(250px);
-}
+  .cube__face--front {
+    transform: rotateY(0deg) translateZ(250px);
+  }
+  .cube__face--right {
+    transform: rotateY(90deg) translateZ(250px);
+  }
+  .cube__face--back {
+    transform: rotateY(180deg) translateZ(250px);
+  }
+  .cube__face--left {
+    transform: rotateY(-90deg) translateZ(250px);
+  }
+  .cube__face--top {
+    transform: rotateX(90deg) translateZ(250px);
+  }
+  .cube__face--bottom {
+    transform: rotateX(-90deg) translateZ(250px);
+  }
 
-label {
-  margin-right: 10px;
-}
+  label {
+    margin-right: 10px;
+  }
 
 </style>
 
@@ -160,7 +166,7 @@ export default {
       cube: null,
       radioGroup: null,
       currentClass: "",
-      categoryNamesWithSides: []
+      categoriesWithSides: []
       // can't affect all other categories....
     };
   },
@@ -175,14 +181,14 @@ export default {
         var sides = ["front", "right", "back", "left", "top", "bottom"];
         var index = 0;
         this.categories.forEach(category => {
-          this.categoryNamesWithSides.push({
-            category: category.category,
+          this.categoriesWithSides.push({
+            category: category,
             side: sides[index]
           });
           index += 1;
         });
 
-        // this.categoryNamesWithSides = this.categories.map(category => {category: category.category, })
+        // this.categoriesWithSides = this.categories.map(category => {category: category.category, })
       }.bind(this)
     );
     console.log("HELLO!!!");
