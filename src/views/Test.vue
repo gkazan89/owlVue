@@ -5,22 +5,20 @@
       <div v-for="category in categories">
         <h2>{{category.category}}</h2>
         <h4>{{ category.data[category.currentArticleIndex].webTitle }}</h4>
-        <p>{{category.data[category.currentArticleIndex].apiUrl}}</p>
         <!-- Hidden article text here -->
         <div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(category)">Up One</button>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(category)">Next</button>
         </div>
         <div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="downOne(category)">Down One</button>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="downOne(category)">Previous</button>
         </div>
         <div>
           <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="show-dialog" v-on:click="read(category)">READ</button>
         </div>
         <div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="visible(category)">VISIBLE</button>
-        </div>
-        <div>
-          <p v-if="category.currentArticleVisible" v-html="info.response.content.blocks.body[0].bodyHtml"></p>
+          <p v-if="category.currentArticleVisible" v-html="info.response.content.blocks.body[0].bodyHtml">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="show-dialog" v-on:click="read(category)">READ</button>
+          </p>
         </div>
       </div>  
     </div>
@@ -82,16 +80,14 @@ export default {
           this.info = response.data;
         }.bind(this)
       );
-      console.log(this);
-    },
-    // need to figure out how to get this to change
-    visible: function(category) {
       console.log("CURRENT STATUS:");
       console.log(category.currentArticleVisible);
       category.currentArticleVisible = !category.currentArticleVisible;
       console.log("NEW STATUS:");
       console.log(category.currentArticleVisible);
-    }
+      console.log(this);
+    },
+    // need to figure out how to get this to change
   },
   computed: {}
 };
