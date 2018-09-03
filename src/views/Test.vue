@@ -34,8 +34,8 @@
   }
 
   .reading img{
-    max-height: 100%;
-    max-width: 100%;
+    max-height: 300px;
+    max-width: 500px;
   }
 
   .buttonNavs {
@@ -54,7 +54,7 @@
     data: function() {
       return {
         categories: [],
-        info: [],
+        info: []
         // can't affect all other categories....
       };
     },
@@ -65,8 +65,14 @@
           console.log("categories");
           console.log(response);
           this.categories = response.data;
+          // this.apiUrls = response.data.apiUrl;
+          console.log("HERE ARE YOUR PICS");
+          console.log(this);
         }.bind(this)
       );
+
+
+
       // var other = axios.get();
     },
 
