@@ -16,8 +16,13 @@
           <div class="kids">
             <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(category)">Next</button>
           </div>
-        </div>  
-        <p class="reading" v-if="category.currentArticleVisible" v-html="info.response.content.blocks.body[0].bodyHtml"></p>
+        </div>
+        <div class="reading" v-if="category.currentArticleVisible">
+          <p v-html="info.response.content.blocks.body[0].bodyHtml"></p>
+          <div class="collapse">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="show-dialog" v-on:click="read(category)">COLLAPSE PANEL</button>
+          </div>
+        </div>
       </div>  
     </div>
   </div>
@@ -44,6 +49,9 @@
 
   .kids {
     margin: auto;
+  }
+  .collapse {
+    text-align: center;
   }
 </style>
 
