@@ -7,7 +7,8 @@
       <router-link to="/login">Log In</router-link> |
       <router-link to="/logout">Log Out</router-link> |
       <router-link to="/test">Test</router-link> |
-      <router-link to="/saph">Cube</router-link>
+      <router-link to="/saph">Cube</router-link> |
+      <router-link to="/cube2">Cube2</router-link>
     </div>
     <router-view/>
   </div>

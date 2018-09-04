@@ -7,6 +7,7 @@ import Login from "./views/Login.vue";
 import Logout from "./views/Logout.vue";
 import Test from "./views/Test.vue";
 import Saph from "./views/Saph.vue";
+import Cube2 from "./views/Cube2.vue";
 
 Vue.use(Router);
 
@@ -18,6 +19,7 @@ export default new Router({
     { path: "/login", name: "login", component: Login },
     { path: "/logout", name: "logout", component: Logout },
     { path: "/test", name: "test", component: Test },
-    { path: "/saph", name: "saph", component: Saph }
+    { path: "/saph", name: "saph", component: Saph },
+    { path: "/cube2", name: "cube2", component: Cube2 }
   ]
 });

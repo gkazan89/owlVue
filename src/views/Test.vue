@@ -75,7 +75,7 @@
           console.log(response);
           this.categories = response.data;
           this.categories.forEach(category => {
-            console.log("getArticleImage for", category.data[0])
+            console.log("getArticleImage for", category.data[0]);
             this.getArticleImage(category.data[0]);
           });
           // this.apiUrls = response.data.apiUrl;
@@ -108,6 +108,8 @@
             this.info = response.data;
           }.bind(this)
         );
+        // perhaps include a quick edge case check up here to collapse the open one, same code will work on the cube
+
         console.log("CURRENT STATUS:");
         console.log(category.currentArticleVisible);
         category.currentArticleVisible = !category.currentArticleVisible;
@@ -128,9 +130,7 @@
           }
           );
         }
-          // article.imageUrl = "http://wiesmann.codiferes.net/share/bitmaps/test_pattern.svg";
       }
-      // need to figure out how to get this to change
     },
     computed: {}
   };
