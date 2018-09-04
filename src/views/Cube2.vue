@@ -15,7 +15,7 @@
         <div class="scene">
           <div class="cube">
             <div v-for="categoryWithSide in categoriesWithSides">
-              <div v-bind:class="'cube__face cube__face--'+categoryWithSide.side">
+              <div class="face" v-bind:class="'cube__face cube__face--'+categoryWithSide.side">
                 <p>{{categoryWithSide.category.category}}</p>
                 <p>{{ categoryWithSide.category.data[categoryWithSide.category.currentArticleIndex].webTitle }}</p>
                 <div>
@@ -25,13 +25,12 @@
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(categoryWithSide.category)">NEXT</button>
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="downOne(categoryWithSide.category)">BACK</button>
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="show-dialog" v-on:click="read(categoryWithSide.category)">READ ARTICLE</button>
-          <!--         <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" v-on:click="visible(categoryWithSide.category)">VISIBLE</button> -->
+                  <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="show-dialog" v-on:click="garage(categoryWithSide.category)">OPEN GARAGE</button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
+        </div> 
       </div>  
     </div>
   </div>
@@ -49,10 +48,9 @@
 }
 
 .scene {
-  width: 500px;
-  height: 500px;
-  margin: 100px;
-  perspective: 600px;
+  width: 600px;
+  height: 600px;
+  perspective: 400px;
 }
 
 .cube {
@@ -60,33 +58,34 @@
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transform: translateZ(-250px);
+  transform: translateZ(-300px);
   transition: transform 1s;
 }
 
+/* show class rotates the cube */
 .cube.show-front {
-  transform: translateZ(-250px) rotateY(0deg);
+  transform: translateZ(-300px) rotateY(0deg);
 }
 .cube.show-right {
-  transform: translateZ(-250px) rotateY(-90deg);
+  transform: translateZ(-300px) rotateY(-90deg);
 }
 .cube.show-back {
-  transform: translateZ(-250px) rotateY(-180deg);
+  transform: translateZ(-300px) rotateY(-180deg);
 }
 .cube.show-left {
-  transform: translateZ(-250px) rotateY(90deg);
+  transform: translateZ(-300px) rotateY(90deg);
 }
 .cube.show-top {
-  transform: translateZ(-250px) rotateX(-90deg);
+  transform: translateZ(-300px) rotateX(-90deg);
 }
 .cube.show-bottom {
-  transform: translateZ(-250px) rotateX(90deg);
+  transform: translateZ(-300px) rotateX(90deg);
 }
 
 .cube__face {
   position: absolute;
-  width: 500px;
-  height: 500px;
+  width: 600px;
+  height: 600px;
   border: 2px solid black;
   line-height: 500px;
   font-size: 40px;
@@ -115,22 +114,26 @@
 }
 
 .cube__face--front {
-  transform: rotateY(0deg) translateZ(250px);
+  transform: rotateY(0deg) translateZ(300px);
 }
 .cube__face--right {
-  transform: rotateY(90deg) translateZ(250px);
+  transform: rotateY(90deg) translateZ(300px);
 }
 .cube__face--back {
-  transform: rotateY(180deg) translateZ(250px);
+  transform: rotateY(180deg) translateZ(300px);
 }
 .cube__face--left {
-  transform: rotateY(-90deg) translateZ(250px);
+  transform: rotateY(-90deg) translateZ(300px);
 }
 .cube__face--top {
-  transform: rotateX(90deg) translateZ(250px);
+  transform: rotateX(90deg) translateZ(300px);
 }
 .cube__face--bottom {
-  transform: rotateX(-90deg) translateZ(250px);
+  transform: rotateX(-90deg) translateZ(300px);
+}
+
+.cube__face--garage {
+  transform: translateY(-50%) rotateX(80deg);
 }
 
 label {
@@ -155,7 +158,10 @@ export default {
       cube: null,
       radioGroup: null,
       currentClass: "",
-      categoriesWithSides: []
+      categoriesWithSides: [],
+      door: null,
+      garageClass: ""
+
       // can't affect all other categories....
     };
   },
@@ -191,6 +197,8 @@ export default {
     this.cube = document.querySelector(".cube");
     this.radioGroup = document.querySelector(".radio-group");
     this.currentClass = "";
+    this.door = document.querySelector(".face");
+    this.garageClass = "";
   },
 
   methods: {
@@ -233,6 +241,16 @@ export default {
       }
       this.cube.classList.add(showClass);
       this.currentClass = showClass;
+    },
+    garage: function(event) {
+      console.log("---------");
+      var garageDoor = "cube__face--garage";
+      if (this.currentClass) {
+        this.door.classList.remove(this.currentClass);
+      }
+      this.door.classList.add(garageDoor);
+      this.garageClass = garageDoor;
+      console.log("Garage door");
     }
   },
   computed: {}
