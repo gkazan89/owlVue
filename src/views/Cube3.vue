@@ -20,9 +20,10 @@
                 <p>{{categoryWithSide.category.category}}</p>
                 <!-- headline -->
                 <p>{{ categoryWithSide.category.data[categoryWithSide.category.currentArticleIndex].webTitle }}</p>
-                <div class="articleContainer">
+                <div class="articleContainer" v-if="categoryWithSide.category.currentArticleVisible">
                   <!-- article text -->
-                  <p class="content" v-if="categoryWithSide.category.currentArticleVisible" v-html="info.response.content.blocks.body[0].bodyHtml"></p>
+                  <p class="content" v-html="info.response.content.blocks.body[0].bodyHtml">
+                  </p>
                 </div>
                 <div class="buttons">
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(categoryWithSide.category)">NEXT</button>
@@ -32,6 +33,7 @@
               </div>
             </div>
           </div>
+          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="show-dialog" v-on:click="read(category)">COLLAPSE ARTICLE</button> 
         </div> 
       </div>  
     </div>
@@ -40,7 +42,6 @@
 
 <style>
 .article_img img {
-  display: block;
   max-width: 500px;
   max-height: 300px;
 }
@@ -149,6 +150,10 @@
 label {
   margin-right: 10px;
 }
+
+.collapse {
+  text-align: center;
+}
 </style>
 
 
@@ -168,7 +173,7 @@ export default {
       cube: null,
       radioGroup: null,
       currentClass: "",
-      categoriesWithSides: [],
+      categoriesWithSides: []
 
       // can't affect all other categories....
     };
