@@ -63,7 +63,8 @@
     data: function() {
       return {
         categories: [],
-        info: []
+        info: [],
+        seeText: false
         // can't affect all other categories....
       };
     },

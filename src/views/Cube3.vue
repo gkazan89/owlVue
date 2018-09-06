@@ -22,8 +22,11 @@
                 <p>{{ categoryWithSide.category.data[categoryWithSide.category.currentArticleIndex].webTitle }}</p>
                 <div class="articleContainer" v-if="categoryWithSide.category.currentArticleVisible">
                   <!-- article text -->
-                  <p class="content" v-html="info.response.content.blocks.body[0].bodyHtml">
-                  </p>
+                  <div class="content">
+                    <p v-html="info.response.content.blocks.body[0].bodyHtml">
+                    </p>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="show-dialog" v-on:click="read(categoryWithSide.category)">COLLAPSE ARTICLE</button> 
+                  </div>
                 </div>
                 <div class="buttons">
                   <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" v-on:click="upOne(categoryWithSide.category)">NEXT</button>
@@ -33,7 +36,6 @@
               </div>
             </div>
           </div>
-          <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="show-dialog" v-on:click="read(category)">COLLAPSE ARTICLE</button> 
         </div> 
       </div>  
     </div>
