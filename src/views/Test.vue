@@ -21,7 +21,7 @@
         <div class="reading" v-if="category.currentArticleVisible">
           <p v-html="info.response.content.blocks.body[0].bodyHtml"></p>
           <div class="collapse">
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="show-dialog" v-on:click="read(category)">COLLAPSE ARTICLE</button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--accent" id="show-dialog" v-on:click="collapse(category)">COLLAPSE ARTICLE</button>
           </div>
         </div>
       </div>  
@@ -64,7 +64,6 @@
       return {
         categories: [],
         info: [],
-        seeText: false
         // can't affect all other categories....
       };
     },
@@ -113,6 +112,7 @@
 
         console.log("CURRENT STATUS:");
         console.log(category.currentArticleVisible);
+        this.categories.forEach((cat) => cat.currentArticleVisible = false);
         category.currentArticleVisible = !category.currentArticleVisible;
         console.log("NEW STATUS:");
         console.log(category.currentArticleVisible);
@@ -131,6 +131,10 @@
           }
           );
         }
+      },
+      collapse: function(category) {
+        category.currentArticleVisible = !category.currentArticleVisible;
+        console.log("RIDIN DIRTY");
       }
     },
     computed: {}
