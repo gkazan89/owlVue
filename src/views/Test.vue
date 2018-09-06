@@ -36,12 +36,19 @@
   }
 
   .list, .reading {
-    border: 2px solid black;
+    border: 1px solid grey;
+    text-align: center;
   }
 
   .reading img{
     max-height: 300px;
     max-width: 500px;
+  }
+
+  .reading p {
+    text-align: left;
+    font-size: 20px;
+    padding: 10px;
   }
 
   .buttonNavs {
